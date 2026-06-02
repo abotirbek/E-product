@@ -13,145 +13,42 @@
       font-family: Arial, sans-serif;
     }
 
-    body {
-      background: #f6f7fb;
-    }
-
-    /* NAVBAR */
     nav {
-      background: #111;
-      padding: 14px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      background-color: #222;
+      padding: 15px 30px;
     }
 
-    /* BRAND */
-    .brand {
-      color: #fff;
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-decoration: none;
-    }
-
-    /* LINKS */
     .navbar {
       list-style: none;
       display: flex;
-      gap: 22px;
-      align-items: center;
+      justify-content: center; /* Centers navbar items */
+      gap: 30px;
     }
 
     .navbar li a {
       text-decoration: none;
-      color: #ddd;
-      font-size: 15px;
-      transition: 0.2s;
-      padding: 6px 10px;
-      border-radius: 6px;
+      color: white;
+      font-size: 18px;
+      transition: color 0.3s ease;
     }
 
     .navbar li a:hover {
-      background: #222;
-      color: #fff;
-    }
-
-    /* SEARCH */
-    .search-form {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #1e1e1e;
-      padding: 6px;
-      border-radius: 10px;
-    }
-
-    .search-input {
-      border: none;
-      outline: none;
-      background: transparent;
-      color: #fff;
-      padding: 6px 10px;
-      width: 180px;
-      font-size: 14px;
-    }
-
-    .search-input::placeholder {
-      color: #aaa;
-    }
-
-    .search-btn {
-      border: none;
-      background: #00bcd4;
-      color: #fff;
-      padding: 6px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
-      transition: 0.2s;
-    }
-
-    .search-btn:hover {
-      background: #00a2b8;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .navbar {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .search-form {
-        justify-content: center;
-      }
-
-      .search-input {
-        width: 100%;
-      }
+      color: #00bcd4;
     }
   </style>
 </head>
-
 <body>
 
-<nav>
+  <nav>
+    <ul class="navbar">
+      <li><a href="/">Home</a></li>
+      <li><a href="create">Create</a></li>
+      <li><a href="#">Contacts</a></li>
+    </ul>
+  </nav>
 
-  <!-- BRAND -->
-  <a href="/" class="brand">MyShop</a>
-
-  <!-- LINKS -->
-  <ul class="navbar">
-    <li><a href="/">Home</a></li>
-    <li><a href="/create/">Create</a></li>
-    <li><a href="/contacts/">Contacts</a></li>
-  </ul>
-
-  <!-- SEARCH -->
-  <form class="search-form" method="GET" action="{% url 'search' %}">
-    <input
-      type="text"
-      name="q"
-      class="search-input"
-      placeholder="Search products..."
-    >
-    <button type="submit" class="search-btn">Search</button>
-  </form>
-
-</nav>
-
-{% block content %}
-{% endblock %}
+  {% block content %}
+  {% endblock %}
 
 </body>
 </html>

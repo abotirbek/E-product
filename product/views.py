@@ -52,7 +52,3 @@ def delete_product(request, pk):
         return redirect('get-product')
     else:
         return render(request,'product/delete.html',{'pro':pro})
-
-def search_product(request, title=None):
-    pro = Product.objects.get(title = title)
-    return render(request,'product/read.html',{'pro':pro})
