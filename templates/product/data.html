@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> {{ existence }} </h1>
+<h1> {{ quantity }} </h1>
+<h1> {{ none }} </h1>
+
+{% for p in pro_dict %}
+<pre>
+    id: {{ p.id }}
+    title: {{ p.title }}
+    price: {{ p.price }}
+    quantity: {{ p.quantity }}
+    created_at: {{ p.created_at }}
+    updated_at: {{ p.updated_at }}
+</pre><hr>
+{% endfor %}
+
+{% for p in pro_list %}
+<pre>
+    {{ p }}
+</pre><hr>
+{% endfor %}
+
+{% for p in pro_tuple %}
+<pre>
+    id: {{ p.0 }}
+    title: {{ p.1 }}
+    description: {{ p.2 }}
+    price: {{ p.3 }}
+    quantity: {{p.4 }}
+    created_at: {{ p.5 }}
+    updated_at: {{ p.6 }}
+</pre><hr>
+{% endfor %}
+
+{% for p in pro_only %}
+<pre>
+    {{ p }}
+</pre><hr>
+{% endfor %}
+
+{% for p in pro_defer %}
+<pre>
+    {{ p.title }}
+    {{ p.price }}
+    {{ p.created_at }}
+    {{ p.description }}
+</pre><hr>
+{% endfor %}
+
+{% for p in pro_iterator %}
+<pre>
+    {{ p.title }}
+    {{ p.price }}
+    {{ p.created_at }}
+    {{ p.description }}
+</pre><hr>
+{% endfor %}
+
+{% for p in pro_raw %}
+<pre>
+    {{ p }}
+</pre><hr>
+{% endfor %}
+
+{% endblock %}

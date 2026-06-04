@@ -133,7 +133,7 @@
 
     {% for p in pro %}
     <div class="product-card">
-
+        <div class="product-title">#{{ p.id }}</div>
         <div class="product-title">{{ p.title }}</div>
 
         <div class="badges">
@@ -146,7 +146,8 @@
         </div>
 
         <div class="product-meta">
-            {{ p.created_at|date:"Y-m-d" }} • {{ p.updated_at|date:"Y-m-d" }}
+            Created at {{ p.created_at|date:"Y-m-d" }}
+            Updated at {{ p.updated_at|date:"Y-m-d" }}
         </div>
 
         <div class="bottom-row">

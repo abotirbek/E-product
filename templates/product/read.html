@@ -3,135 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product View</title>
+<title>{{ pro.title|default:"Product Detail" }}</title>
 
 <style>
-    body {
-        margin: 0;
-        padding: 40px 20px;
-        background: linear-gradient(135deg, #f6f7fb, #eef1f7);
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-    }
+:root{
+    --primary:#4f46e5;
+    --primary-dark:#4338ca;
+    --success:#16a34a;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --bg:#f8fafc;
+}
 
-    .product-card {
-        width: 100%;
-        max-width: 520px;
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        overflow: hidden;
-        transition: transform 0.2s ease;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    .product-card:hover {
-        transform: translateY(-3px);
-    }
+body{
+    font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+    background: linear-gradient(135deg,#eef2ff,#f8fafc);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
 
-    .product-header {
-        padding: 24px;
-        border-bottom: 1px solid #eee;
-        text-align: center;
-    }
+.card{
+    width:100%;
+    max-width:900px;
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
 
-    .product-title {
-        font-size: 26px;
-        font-weight: 700;
-        margin: 0;
-        color: #222;
-        letter-spacing: 0.3px;
-    }
+.image{
+    background:linear-gradient(135deg,#6366f1,#8b5cf6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:80px;
+    color:#fff;
+}
 
-    .product-body {
-        padding: 22px 26px;
-    }
+.content{
+    padding:40px;
+}
 
-    .product-meta {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 18px;
-    }
+.meta{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:10px;
+}
 
-    .badge {
-        flex: 1;
-        background: #f4f6f8;
-        padding: 10px 12px;
-        border-radius: 10px;
-        text-align: center;
-        font-size: 14px;
-        color: #444;
-    }
+.title{
+    font-size:30px;
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:15px;
+}
 
-    .badge strong {
-        display: block;
-        font-size: 15px;
-        color: #111;
-        margin-top: 4px;
-    }
+.price{
+    font-size:34px;
+    font-weight:800;
+    color:var(--primary);
+    margin-bottom:15px;
+}
 
-    .product-description {
-        font-size: 15px;
-        line-height: 1.7;
-        color: #555;
-        margin-top: 10px;
-        text-align: justify;
-    }
+.stock{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#ecfdf5;
+    color:var(--success);
+    padding:6px 12px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:20px;
+}
 
-    .product-footer {
-        padding: 18px 26px;
-        border-top: 1px solid #eee;
-        display: flex;
-        justify-content: center;
-    }
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--success);
+}
 
-    .btn {
-        background: #111;
-        color: #fff;
-        padding: 10px 18px;
-        border-radius: 10px;
-        font-size: 14px;
-        text-decoration: none;
-        transition: 0.2s ease;
-    }
+.desc{
+    color:var(--muted);
+    line-height:1.7;
+    margin-bottom:25px;
+}
 
-    .btn:hover {
-        background: #333;
-    }
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-bottom:25px;
+}
 
-    @media (max-width: 600px) {
-        .product-meta {
-            flex-direction: column;
-        }
+.box{
+    background:#f8fafc;
+    padding:14px;
+    border-radius:12px;
+}
+
+.label{
+    font-size:12px;
+    color:var(--muted);
+}
+
+.value{
+    margin-top:5px;
+    font-weight:600;
+    color:var(--text);
+}
+
+.actions{
+    display:flex;
+    gap:12px;
+}
+
+.btn{
+    flex:1;
+    text-align:center;
+    padding:12px;
+    border-radius:12px;
+    font-weight:600;
+    text-decoration:none;
+    transition:.2s;
+}
+
+.primary{
+    background:var(--primary);
+    color:#fff;
+}
+
+.primary:hover{
+    background:var(--primary-dark);
+}
+
+.secondary{
+    border:1px solid #d1d5db;
+    color:var(--text);
+}
+
+.secondary:hover{
+    background:#f3f4f6;
+}
+
+@media(max-width:768px){
+    .card{
+        grid-template-columns:1fr;
     }
+}
 </style>
 </head>
 
 <body>
 
-<div class="product-card">
+<div class="card">
 
-    <div class="product-header">
-        <h1 class="product-title">{{ pro.title }}</h1>
+    <div class="image">
+        📦
     </div>
 
-    <div class="product-body">
+    <div class="content">
 
-        <div class="product-meta">
-            <div class="badge">
-                Price
-                <strong>{{ pro.price }}</strong>
-            </div>
-
-            <div class="badge">
-                Quantity
-                <strong>{{ pro.quantity }}</strong>
-            </div>
+        <div class="meta">
+            Product #{{ pro.id }}
         </div>
 
-        <div class="product-description">
-            {{ pro.description }}
+        <div class="title">
+            {{ pro.title }}
+        </div>
+
+        <div class="price">
+            ${{ pro.price }}
+        </div>
+
+        <div class="stock">
+            <span class="dot"></span>
+            {{ pro.quantity }} in stock
+        </div>
+
+        <div class="desc">
+            {{ pro.description|default:"No description available." }}
+        </div>
+
+        <div class="grid">
+
+            <div class="box">
+                <div class="label">Price</div>
+                <div class="value">${{ pro.price }}</div>
+            </div>
+
+            <div class="box">
+                <div class="label">Quantity</div>
+                <div class="value">{{ pro.quantity }}</div>
+            </div>
+
+            <div class="box">
+                <div class="label">Created</div>
+                <div class="value">
+                    {{ pro.created_at|date:"M d, Y H:i" }}
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="label">Updated</div>
+                <div class="value">
+                    {{ pro.updated_at|date:"M d, Y H:i" }}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="actions">
+            <a href="#" class="btn primary">
+                Add to Cart
+            </a>
+
+            <a href="{% url 'get-product' %}" class="btn secondary">
+                Back
+            </a>
         </div>
 
     </div>
