@@ -84,6 +84,23 @@
                             <li><a class="dropdown-item" href="{% url 'raw' %}">Raw</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            Filter
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'over-500' %}">Over 500</a></li>
+                            <li><a class="dropdown-item" href="{% url 'specific' %}">specific</a></li>
+                        </ul>
+                    </li>
                 </ul>
 
                 <form class="d-flex" role="search">

@@ -3,129 +3,171 @@
 
 <style>
     body {
-        background: #f6f7fb;
+        background: #f5f7fb;
     }
 
     .product-container {
         display: grid;
-        grid-template-columns: repeat(5, 1fr); /* 👈 STRICT 5 COLUMNS */
-        gap: 18px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 24px;
         padding: 24px;
     }
 
     .product-card {
-        background: #ffffff;
-        border-radius: 14px;
-        padding: 16px;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-        transition: all 0.25s ease;
+        background: #fff;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
         display: flex;
         flex-direction: column;
+        border: 1px solid #eef2f7;
     }
 
     .product-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+        transform: translateY(-8px);
+        box-shadow: 0 18px 35px rgba(0,0,0,0.12);
+    }
+
+    /* Product Image */
+    .product-image {
+        height: 220px;
+        background: #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .placeholder {
+        font-size: 60px;
+        color: #cbd5e1;
+    }
+
+    .product-body {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
     }
 
     .product-title {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 700;
-        color: #222;
+        color: #1f2937;
         margin-bottom: 8px;
-        line-height: 1.3;
-    }
-
-    .badges {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        gap: 8px;
-    }
-
-    .badge {
-        font-size: 12px;
-        padding: 6px 10px;
-        border-radius: 20px;
-        background: #f1f5f9;
-        color: #444;
-        flex: 1;
-        text-align: center;
-    }
-
-    .price {
-        background: #e8f7ee;
-        color: #1a7f37;
-        font-weight: 600;
-    }
-
-    .qty {
-        background: #eef2ff;
-        color: #3730a3;
+        line-height: 1.4;
     }
 
     .product-desc {
-        font-size: 13px;
-        color: #666;
+        color: #6b7280;
+        font-size: 14px;
         line-height: 1.5;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
 
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
 
-    .product-meta {
-        font-size: 11px;
-        color: #9aa0a6;
-        margin-top: auto;
-        border-top: 1px solid #f1f1f1;
-        padding-top: 8px;
+    .price-stock {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
     }
 
-    .bottom-row {
+    .price {
+        font-size: 24px;
+        font-weight: 800;
+        color: #10b981;
+    }
+
+    .stock {
+        padding: 5px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .in-stock {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .low-stock {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    .meta {
+        font-size: 12px;
+        color: #9ca3af;
+        margin-top: auto;
+        padding-top: 12px;
+        border-top: 1px solid #f3f4f6;
+    }
+
+    .actions {
         display: flex;
-        gap: 6px;
-        margin-top: 10px;
+        gap: 8px;
+        margin-top: 14px;
     }
 
     .btn {
         flex: 1;
         text-align: center;
-        font-size: 12px;
-        padding: 8px 10px;
-        border-radius: 8px;
+        padding: 10px;
+        border-radius: 10px;
         text-decoration: none;
+        font-size: 13px;
         font-weight: 600;
-        transition: 0.2s ease;
+        transition: 0.25s;
     }
 
-    .btn-read {
-        background: #111;
-        color: #fff;
+    .btn-view {
+        background: #111827;
+        color: white;
     }
 
-    .btn-read:hover {
-        background: #333;
+    .btn-view:hover {
+        background: #000;
     }
 
-    .btn-update {
-        background: #f1f5ff;
+    .btn-edit {
+        background: #dbeafe;
         color: #1d4ed8;
     }
 
-    .btn-update:hover {
-        background: #dbeafe;
+    .btn-edit:hover {
+        background: #bfdbfe;
     }
 
     .btn-delete {
-        background: #fff1f2;
-        color: #e11d48;
+        background: #fee2e2;
+        color: #dc2626;
     }
 
     .btn-delete:hover {
-        background: #ffe4e6;
+        background: #fecaca;
+    }
+
+    @media (max-width: 768px) {
+        .product-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 500px) {
+        .product-container {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
 
@@ -133,27 +175,54 @@
 
     {% for p in pro %}
     <div class="product-card">
-        <div class="product-title">#{{ p.id }}</div>
-        <div class="product-title">{{ p.title }}</div>
 
-        <div class="badges">
-            <div class="badge price">${{ p.price }}</div>
-            <div class="badge qty">Qty: {{ p.quantity }}</div>
+        <div class="product-image">
+            {% if p.image %}
+                <img src="{{ p.image.url }}" alt="{{ p.title }}">
+            {% else %}
+                <div class="placeholder">📦</div>
+            {% endif %}
         </div>
 
-        <div class="product-desc">
-            {{ p.description }}
-        </div>
+        <div class="product-body">
 
-        <div class="product-meta">
-            Created at {{ p.created_at|date:"Y-m-d" }}
-            Updated at {{ p.updated_at|date:"Y-m-d" }}
-        </div>
+            <h3 class="product-title">{{ p.title }}</h3>
 
-        <div class="bottom-row">
-            <a href="{% url 'read' p.pk %}" class="btn btn-read">View</a>
-            <a href="{% url 'update' p.pk %}" class="btn btn-update">Edit</a>
-            <a href="{% url 'delete' p.pk %}" class="btn btn-delete">Delete</a>
+            <div class="product-desc">
+                {{ p.description }}
+            </div>
+
+            <div class="price-stock">
+                <div class="price">${{ p.price }}</div>
+
+                {% if p.quantity > 10 %}
+                    <span class="stock in-stock">In Stock</span>
+                {% else %}
+                    <span class="stock low-stock">
+                        {{ p.quantity }} Left
+                    </span>
+                {% endif %}
+            </div>
+
+            <div class="meta">
+                Product #{{ p.id }} <br>
+                Updated: {{ p.updated_at|date:"M d, Y" }}
+            </div>
+
+            <div class="actions">
+                <a href="{% url 'read' p.pk %}" class="btn btn-view">
+                    View
+                </a>
+
+                <a href="{% url 'update' p.pk %}" class="btn btn-edit">
+                    Edit
+                </a>
+
+                <a href="{% url 'delete' p.pk %}" class="btn btn-delete">
+                    Delete
+                </a>
+            </div>
+
         </div>
 
     </div>

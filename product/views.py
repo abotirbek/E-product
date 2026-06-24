@@ -66,6 +66,23 @@ def get_raw(request):
     pro_raw = Product.objects.raw('select * from product_product where price > 1000')
     return render(request,'product/data.html',{'pro_raw':pro_raw})
 
+def get_specific_price(request):
+    pro = Product.objects.filter(price__exact=200)
+    return render(request,'product/read.html',{'pro':pro})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

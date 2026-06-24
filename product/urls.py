@@ -22,5 +22,6 @@ urlpatterns = [
     path('defer/', views.defer, name='defer'),
     path('iterator/', views.get_iterator, name='iterator'),
     path('raw/', views.get_raw, name='raw'),
+    path('specific/', views.get_specific_price, name='specific'),
 ]
 
