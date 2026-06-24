@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 85vh;
+        background: linear-gradient(135deg, #74ebd5, #9face6);
+    }
+
+    .login-card {
+        width: 350px;
+        background: white;
+        padding: 35px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        text-align: center;
+    }
+
+    .login-card h2 {
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    .subtitle {
+        color: #777;
+        margin-bottom: 25px;
+    }
+
+    .login-card input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 15px;
+        box-sizing: border-box;
+    }
+
+    .login-card input:focus {
+        border-color: #6c63ff;
+        outline: none;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 12px;
+        background: #6c63ff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .login-btn:hover {
+        background: #574bdb;
+    }
+
+    .register-text {
+        margin-top: 20px;
+        color: #666;
+    }
+
+    .register-text a {
+        color: #6c63ff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .register-text a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-card">
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Login to your account</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="login-btn">
+                Login
+            </button>
+        </form>
+
+        <p class="register-text">
+            Don't have an account?
+            <a href="{% url 'register' %}">Register</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}
