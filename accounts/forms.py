@@ -1,5 +1,5 @@
 from django import forms
-from .models import CustomUser
+from .models import CustomUser, Profile
 
 class RegistrationForm(forms.ModelForm):
     class Meta:
@@ -22,3 +22,11 @@ class RegistrationForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150)
     password = forms.CharField(max_length=150)
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model=Profile
+        fields=[
+            'birth_date',
+            'bio'
+        ]
