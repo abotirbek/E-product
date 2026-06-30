@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import ProductForm
 from .models import Product
 
 # Create your views here.
@@ -73,62 +74,30 @@ def get_specific_price(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def create_product(request):
     if request.method == "POST":
-        title = request.POST.get('title')
-        price = request.POST.get('price')
-        quantity = request.POST.get('quantity')
-        description = request.POST.get('description')
-        if title and price and quantity and description:
-            Product.objects.create(
-                title = title,
-                price = price,
-                quantity = quantity,
-                description = description,
-            )
-            return redirect('create')
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('get-product')
     else:
-        return render(request, 'product/create.html')
+        form = ProductForm()
+    return render(request, 'product/create.html', {'form':form})
 
 def read_product(request, pk=None):
     pro = Product.objects.get(pk = pk)
     return render(request,'product/read.html',{'pro':pro})
 
 def update_product(request, pk):
-    pro = Product.objects.get(pk=pk)
+    product = get_object_or_404(Product, pk=pk)
     if request.method == "POST":
-        title = request.POST.get('title',pro.title)
-        price = request.POST.get('price',pro.price)
-        quantity = request.POST.get('quantity',pro.quantity)
-        description = request.POST.get('description',pro.description)
-        updated_at = request.POST.get('updated_at',pro.updated_at)
-        if title and price and quantity and description and updated_at:
-            pro.title = title
-            pro.price = price
-            pro.quantity = quantity
-            pro.description = description
-            pro.updated_at = updated_at
-            pro.save()
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
             return redirect('get-product')
     else:
-        return render(request,'product/update.html',{'pro':pro})
-
+        form = ProductForm(instance=product)
+    return render(request, 'product/update.html', {'form':form})
 
 def delete_product(request, pk):
     pro = Product.objects.get(pk=pk)
