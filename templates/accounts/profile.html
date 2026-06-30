@@ -52,6 +52,20 @@
     .edit-btn:hover {
         background: #555;
     }
+
+    .back-btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 8px 16px;
+        background: red;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .back-btn:hover {
+        background: #666;
+    }
 </style>
 
 <div class="profile-container">
@@ -87,6 +101,7 @@
     </div>
 
     <a href="{% url 'edit_profile' %}" class="edit-btn">Edit Profile</a>
+    <a href="{% url 'get-product' %}" class="back-btn">Back</a>
 </div>
 
 {% endblock %}

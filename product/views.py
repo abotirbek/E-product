@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+
+from accounts.permissions import permit_creating, permit_updating, permit_deleting
 from .forms import ProductForm
 from .models import Product
 
@@ -73,7 +75,7 @@ def get_specific_price(request):
 
 
 
-
+@permit_creating
 def create_product(request):
     if request.method == "POST":
         form = ProductForm(request.POST)
@@ -88,6 +90,7 @@ def read_product(request, pk=None):
     pro = Product.objects.get(pk = pk)
     return render(request,'product/read.html',{'pro':pro})
 
+@permit_updating
 def update_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
     if request.method == "POST":
@@ -99,6 +102,7 @@ def update_product(request, pk):
         form = ProductForm(instance=product)
     return render(request, 'product/update.html', {'form':form})
 
+@permit_deleting
 def delete_product(request, pk):
     pro = Product.objects.get(pk=pk)
     if request.method == 'POST':

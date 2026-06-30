@@ -1,207 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e-product</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>e-product</title>
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        :root{
-            --primary:#2563eb;
-            --dark:#1f2937;
-            --light:#ffffff;
-            --gray:#f4f4f4;
-            --text:#374151;
-            --hover:#3b82f6;
-        }
+:root{
+    --primary:#2563eb;
+    --primary-hover:#1d4ed8;
+    --dark:#0f172a;
+    --surface:#ffffff;
+    --background:#f8fafc;
+    --border:#e2e8f0;
+    --text:#334155;
+    --muted:#64748b;
+    --radius:12px;
+    --shadow:0 8px 25px rgba(15,23,42,.08);
+    --transition:.25s ease;
+}
 
-        body{
-            font-family:Arial, Helvetica, sans-serif;
-            background:#f8fafc;
-            color:var(--text);
-        }
+body{
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:var(--background);
+    color:var(--text);
+    line-height:1.5;
+}
 
-        /* Navbar */
+/* ===========================
+        NAVBAR
+=========================== */
 
-        .navbar{
-            background:var(--dark);
-            padding:15px 40px;
-            position:sticky;
-            top:0;
-            z-index:100;
-        }
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:999;
+    background:rgba(15,23,42,.95);
+    backdrop-filter:blur(10px);
+    box-shadow:0 4px 20px rgba(0,0,0,.08);
+}
 
-        .container{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            flex-wrap:wrap;
-            gap:20px;
-        }
+.container{
+    max-width:1300px;
+    margin:auto;
+    padding:16px 32px;
 
-        .logo{
-            color:white;
-            text-decoration:none;
-            font-size:22px;
-            font-weight:bold;
-        }
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+}
 
-        .menu{
-            display:flex;
-            align-items:center;
-            list-style:none;
-            gap:20px;
-        }
+/* ===========================
+        LOGO
+=========================== */
 
-        .menu li{
-            position:relative;
-        }
+.logo{
+    text-decoration:none;
+    color:white;
+    font-size:1.2rem;
+    font-weight:700;
+    white-space:nowrap;
+}
 
-        .menu a{
-            text-decoration:none;
-            color:white;
-            transition:.3s;
-            padding:8px 12px;
-            display:block;
-        }
+.logo span{
+    color:#93c5fd;
+}
 
-        .menu a:hover{
-            color:#60a5fa;
-        }
+/* ===========================
+        MENU
+=========================== */
 
-        /* Dropdown */
+.menu{
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
 
-        .dropdown-content{
-            display:none;
-            position:absolute;
-            background:white;
-            min-width:220px;
-            top:40px;
-            left:0;
-            border-radius:8px;
-            overflow:hidden;
-            box-shadow:0 8px 25px rgba(0,0,0,.15);
-        }
+.menu>li{
+    position:relative;
+}
 
-        .dropdown-content a{
-            color:#333;
-            padding:10px 15px;
-        }
+.menu a{
+    text-decoration:none;
+    color:white;
+    padding:10px 14px;
+    border-radius:8px;
+    transition:var(--transition);
+    display:block;
+}
 
-        .dropdown-content a:hover{
-            background:#f1f5f9;
-            color:var(--primary);
-        }
+.menu a:hover{
+    background:rgba(255,255,255,.08);
+    color:#93c5fd;
+}
 
-        .dropdown:hover .dropdown-content{
-            display:block;
-        }
+/* ===========================
+        DROPDOWN
+=========================== */
 
-        /* Search */
+.dropdown-content{
+    position:absolute;
+    top:52px;
+    left:0;
 
-        .search-form{
-            display:flex;
-            gap:10px;
-        }
+    display:none;
+    min-width:230px;
 
-        .search-form input{
-            padding:10px 15px;
-            width:220px;
-            border:1px solid #ddd;
-            border-radius:6px;
-            outline:none;
-        }
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
 
-        .search-form input:focus{
-            border-color:var(--primary);
-        }
+    box-shadow:var(--shadow);
+}
 
-        .search-form button{
-            padding:10px 18px;
-            border:none;
-            background:var(--primary);
-            color:white;
-            border-radius:6px;
-            cursor:pointer;
-            transition:.3s;
-        }
+.dropdown:hover .dropdown-content{
+    display:block;
+}
 
-        .search-form button:hover{
-            background:var(--hover);
-        }
+.dropdown-content a{
+    color:var(--text);
+    padding:12px 16px;
+}
 
-        /* Responsive */
+.dropdown-content a:hover{
+    background:#eff6ff;
+    color:var(--primary);
+}
 
-        @media(max-width:900px){
+/* ===========================
+        SEARCH
+=========================== */
 
-            .container{
-                flex-direction:column;
-                align-items:flex-start;
-            }
+.search-form{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
 
-            .menu{
-                flex-direction:column;
-                width:100%;
-                gap:5px;
-            }
+.search-form input{
+    width:240px;
+    padding:11px 16px;
 
-            .search-form{
-                width:100%;
-            }
+    border:1px solid var(--border);
+    border-radius:999px;
 
-            .search-form input{
-                width:100%;
-            }
+    outline:none;
+    transition:var(--transition);
+}
 
-            .dropdown-content{
-                position:static;
-                box-shadow:none;
-                background:#2f3b4b;
-            }
+.search-form input:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 4px rgba(37,99,235,.15);
+}
 
-            .dropdown-content a{
-                color:white;
-            }
+.search-form button{
+    border:none;
+    cursor:pointer;
 
-            .dropdown-content a:hover{
-                background:#3d4b5c;
-            }
-        }
+    padding:11px 20px;
 
-        main{
-            max-width:1200px;
-            margin:auto;
-            padding:30px;
-        }
+    background:var(--primary);
+    color:white;
 
-    </style>
+    border-radius:999px;
+
+    font-weight:600;
+    transition:var(--transition);
+}
+
+.search-form button:hover{
+    background:var(--primary-hover);
+    transform:translateY(-1px);
+}
+
+/* ===========================
+        MAIN
+=========================== */
+
+main{
+    max-width:1300px;
+    margin:40px auto;
+    padding:0 32px;
+}
+
+/* ===========================
+        RESPONSIVE
+=========================== */
+
+@media (max-width:900px){
+
+    .container{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .menu{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .menu a{
+        width:100%;
+    }
+
+    .search-form{
+        width:100%;
+    }
+
+    .search-form input{
+        width:100%;
+    }
+
+    .dropdown-content{
+        position:static;
+        display:block;
+        background:#172554;
+        border:none;
+        box-shadow:none;
+        margin-left:20px;
+    }
+
+    .dropdown-content a{
+        color:white;
+    }
+
+    .dropdown-content a:hover{
+        background:rgba(255,255,255,.08);
+    }
+}
+
+</style>
 
 </head>
+
 <body>
 
 <nav class="navbar">
 
     <div class="container">
 
-        <a href="{% url 'profile' %}" class="logo">
-            Welcome {{ request.user.username }}
+        <a href="{% url 'get-product' %}" class="logo">
+            E-Product
         </a>
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="logo">
+                {{ request.user.username }}
+            </a>
+        {% endif %}
 
         <ul class="menu">
 
             <li><a href="{% url 'get-product' %}">Home</a></li>
 
-            <li><a href="{% url 'create' %}">Create</a></li>
+            {% if request.user.role == 'admin' %}
+                <li><a href="{% url 'create' %}">Create</a></li>
+            {% endif %}
 
             <li class="dropdown">
 
-                <a href="#">Categories ▼</a>
+                <a href="#">Categories ▾</a>
 
                 <div class="dropdown-content">
                     <a href="{% url 'over-500' %}">Over 500</a>
@@ -250,8 +316,10 @@
 </nav>
 
 <main>
-    {% block content %}
-    {% endblock %}
+
+{% block content %}
+{% endblock %}
+
 </main>
 
 </body>
