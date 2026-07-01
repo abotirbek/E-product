@@ -298,17 +298,9 @@ main{
 
         </ul>
 
-        <form class="search-form">
-
-            <input
-                type="search"
-                placeholder="Search products..."
-            >
-
-            <button type="submit">
-                Search
-            </button>
-
+        <form class="search-form" method="get">
+            <input type="text" name="q" placeholder="Mahsulot nomi..." value="{{ query }}">
+            <button type="submit">Qidirish</button>
         </form>
 
     </div>
