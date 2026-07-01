@@ -6,20 +6,18 @@ from .models import Product
 
 # Create your views here.
 
-def search_product(request):
+def get_product(request):
     query = request.GET.get('q')
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('-price')
     if query:
         products = products.filter(title__icontains = query)
+    else:
+        query = ''
     context = {
         'products': products,
         'query': query
     }
     return render(request, 'product/list.html', context)
-
-def get_product(request):
-    products = Product.objects.all().order_by('-price')
-    return render(request, 'product/list.html',{'products':products})
 
 def get_over_500(request):
     pro = Product.objects.filter(price__gte=500).order_by('price')
